@@ -1,0 +1,32 @@
+.field {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-image: url('../../assets/img/board.jpg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-stack{
+    position: relative;
+     img {
+        position: absolute;
+        width: 150px;
+     }
+}
+
+.top-card {
+    cursor: pointer;
+    transition: all 125ms ease-in-out;
+    &:hover {
+        transform: scale(1.01) translateY(-10px);
+    }
+
+.pick-card{
+    transition: all 125ms ease-in-out;
+    transform: scale(1.5) !important;
+}    
+}
