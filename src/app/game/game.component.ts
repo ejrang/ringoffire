@@ -1,5 +1,5 @@
 import { Component, OnInit ,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { Game } from '../../models/game';
 import { PlayerComponent } from "../player/player.component";
 import {MatButtonModule} from '@angular/material/button';
@@ -13,6 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
+
 export class GameComponent implements OnInit{
   pickCardAnimation = false;
   game: Game = new Game;
