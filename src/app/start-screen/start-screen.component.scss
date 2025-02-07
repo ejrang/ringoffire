@@ -10,12 +10,14 @@
     background-size: 100% 100%;
     text-align: center;
     overflow: hidden;
+    height: 100vh;
 }
 
 .headline{
     display: flex;
     justify-content: center;
-    transform: translateY(-15%);
+    padding: 54px 0 0;
+
 
 
     h1 {
@@ -25,7 +27,7 @@
         font-family: 'Cinzel', serif;
         font-size: 64px;
         width: 520px;
-        padding: 10px 20px;
+        padding: 24px 20px;
         text-shadow: 
         2px 2px 2px  #8b0000,
         4px 4px 0px #550000;
@@ -35,33 +37,36 @@
 
     }
 }
-
-.start-screen {
-    width: 100vw;
-    height: 100vh;
+                   
+.start-screen {    
+    // width: 100vw;
+    // height: 100vh;
+    max-height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    position: relative;
+    // position: relative;
 
-    // img {
-    //     height: 115vh;
-    //     transform: translateY(-15%);
+    img {
+        display: flex;
+        align-items: flex-start;
+        max-width: 950px;
+        // transform: translateY(-15%);
     
-    // } 
+    } 
 }
 
 .playGame {
     background-image: linear-gradient(200deg, #ffa100, #ffd900);
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 0px;
-    right: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    align-items:center;
+    // position: absolute;
+    // bottom: 0px;
+    // right: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
     width: 320px;
     height: 90px;
     text-align: center;
@@ -69,6 +74,8 @@
     font-family: 'Cinzel', serif;
     font-size: 32px;
     border-radius: 12px;
+    margin-inline: auto;
+    margin-top: 64px;
     cursor: pointer;
 
     &:hover {
