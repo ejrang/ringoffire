@@ -1,9 +1,8 @@
 import { Component , inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-
+import { Firestore, collection, collectionData, limit, onSnapshot, query } from '@angular/fire/firestore';
+import { gameService } from './firebase-service/game-service';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +14,8 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   title = 'ringoffire';
   firestore: Firestore = inject(Firestore);
-  items$: Observable<any[]>;
 
   constructor() {
-    const aCollection = collection(this.firestore, 'items')
-    this.items$ = collectionData(aCollection);
   }
+
 }
