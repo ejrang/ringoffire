@@ -2,7 +2,6 @@ import { Component , inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Firestore, collection, collectionData, limit, onSnapshot, query } from '@angular/fire/firestore';
-import { gameService } from './firebase-service/game-service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +15,7 @@ export class AppComponent {
   firestore: Firestore = inject(Firestore);
 
   constructor() {
+
   }
 
 }
