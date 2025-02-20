@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 
 
+
 @Component({
   selector: 'app-game-info',
   standalone: true,

@@ -9,5 +9,11 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync(), provideFirebaseApp(() => initializeApp({"projectId":"ring-of-fire-f7eb4","appId":"1:117890736887:web:a0c9037fa34367138569f2","storageBucket":"ring-of-fire-f7eb4.firebasestorage.app","apiKey":"AIzaSyBkU_g1HyG5xtaCkeZdzvypRGa4u_OwvC4","authDomain":"ring-of-fire-f7eb4.firebaseapp.com","messagingSenderId":"117890736887"})), provideFirestore(() => getFirestore()), provideFirebaseApp(() => initializeApp({"projectId":"ring-of-fire-f7eb4","appId":"1:117890736887:web:da01ee63df8036fc8569f2","storageBucket":"ring-of-fire-f7eb4.firebasestorage.app","apiKey":"AIzaSyBkU_g1HyG5xtaCkeZdzvypRGa4u_OwvC4","authDomain":"ring-of-fire-f7eb4.firebaseapp.com","messagingSenderId":"117890736887"})), provideFirestore(() => getFirestore()), provideDatabase(() => getDatabase()), provideStorage(() => getStorage()), provideFirebaseApp(() => initializeApp({"projectId":"ring-of-fire-f7eb4","appId":"1:117890736887:web:da01ee63df8036fc8569f2","storageBucket":"ring-of-fire-f7eb4.firebasestorage.app","apiKey":"AIzaSyBkU_g1HyG5xtaCkeZdzvypRGa4u_OwvC4","authDomain":"ring-of-fire-f7eb4.firebaseapp.com","messagingSenderId":"117890736887"})), provideFirestore(() => getFirestore()), provideDatabase(() => getDatabase()), provideStorage(() => getStorage())]
+  providers: [provideRouter(routes), provideFirebaseApp(() => 
+    initializeApp({"projectId":"ring-of-fire-cfacf","appId":"1:867481489785:web:af92dffa565fc085061fa8",
+    "storageBucket":"ring-of-fire-cfacf.firebasestorage.app","apiKey":"AIzaSyApTCtX78_aWgIBtF8HkunmZji8mPbUg_U","authDomain":"ring-of-fire-cfacf.firebaseapp.com",
+    "messagingSenderId":"867481489785","measurementId":"G-3GCBTLNNEL"})),
+    provideFirestore(() => getFirestore()), provideDatabase(() => getDatabase())
+    
+  ]
 };

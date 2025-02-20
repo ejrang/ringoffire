@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { FirebaseServiceService } from '../services/firebase-service.service';
 
 @Component({
   selector: 'app-start-screen',
@@ -10,10 +11,18 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './start-screen.component.scss'
 })
 export class StartScreenComponent {
-  constructor(private router: Router) {}
+fireService = inject(FirebaseServiceService)
+  constructor(private router: Router) {
+    // this.ngOnInit()
+  }
 
   newGame() {
     // Start Game
     this.router.navigateByUrl('/game');
   }
+
+  ngOnInit(){
+    this.fireService.getDocTest();
+  }
 }
+

@@ -2,6 +2,8 @@ import { Component , inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Firestore, collection, collectionData, limit, onSnapshot, query } from '@angular/fire/firestore';
+import { FirebaseServiceService } from './services/firebase-service.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,6 @@ import { Firestore, collection, collectionData, limit, onSnapshot, query } from 
 })
 export class AppComponent {
   title = 'ringoffire';
-  firestore: Firestore = inject(Firestore);
 
   constructor() {
 
