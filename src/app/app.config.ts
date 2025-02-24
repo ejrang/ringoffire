@@ -2,7 +2,7 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
@@ -14,6 +14,6 @@ export const appConfig: ApplicationConfig = {
     "storageBucket":"ring-of-fire-cfacf.firebasestorage.app","apiKey":"AIzaSyApTCtX78_aWgIBtF8HkunmZji8mPbUg_U","authDomain":"ring-of-fire-cfacf.firebaseapp.com",
     "messagingSenderId":"867481489785","measurementId":"G-3GCBTLNNEL"})),
     provideFirestore(() => getFirestore()), provideDatabase(() => getDatabase())
-    
+    , provideAnimations()
   ]
 };

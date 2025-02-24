@@ -10,6 +10,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { GameInfoComponent } from "../game-info/game-info.component";
+import { FirebaseServiceService } from '../services/firebase-service.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class GameComponent implements OnInit{
   currentCard: string = '';
   
   
-  constructor(public dialog: MatDialog){
+  constructor(private firebaseService: FirebaseServiceService,public dialog: MatDialog){
   }
   ngOnInit(): void {
     this.newGame();
@@ -40,6 +41,9 @@ export class GameComponent implements OnInit{
 
   newGame(){
     this.game = new Game;
+    this.firebaseService 
+    .collection('games')
+    .add({'hsllo':`Welt`})
   }
 
   takeCard() {

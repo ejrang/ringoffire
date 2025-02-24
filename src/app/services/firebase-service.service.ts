@@ -9,7 +9,6 @@ import { Firestore, collection, doc, getDoc} from '@angular/fire/firestore';
 export class FirebaseServiceService {
   firestore = inject(Firestore)
 
-
  async getDocTest(){
     const docRef = doc(collection(this.firestore, "games"),"7iFbTRB3vuzdDgSqoeU0");
     const docSnap = await getDoc(docRef);
