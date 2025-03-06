@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { addDoc, collection, Firestore } from '@angular/fire/firestore';
 import { FirebaseServiceService } from '../services/firebase-service.service';
+import { Game } from '../../models/game';
 
 @Component({
   selector: 'app-start-screen',
@@ -12,13 +14,21 @@ import { FirebaseServiceService } from '../services/firebase-service.service';
 })
 export class StartScreenComponent {
 fireService = inject(FirebaseServiceService)
-  constructor(private router: Router) {
+  constructor(private router: Router, private firebaseService:FirebaseServiceService) {
     // this.ngOnInit()
   }
 
-  newGame() {
+  async newGame() {
     // Start Game
-    this.router.navigateByUrl('/game');
+    let game = new Game()
+    const docRef = await addDoc(
+      collection(this.firebaseService.firestore, "games"),
+      game.toJson()).then((gameInfo: any) => {
+        console.log(gameInfo);
+        
+        this.router.navigateByUrl('/game/' + gameInfo.id);
+      })
+
   }
 
   ngOnInit(){

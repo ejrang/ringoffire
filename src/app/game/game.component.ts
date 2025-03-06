@@ -41,7 +41,8 @@ export class GameComponent implements OnInit{
     this.newGame();
     this.route.params.subscribe((params) => {
         this.unsub = onSnapshot(
-        doc(this.firebaseService.firestore, "games", "1AFrqgsL0PUAVmPSYJB3"), 
+        doc(this.firebaseService.firestore, "games", params['id']), 
+  
    
         (game: any) => { 
          this.game.currentPlayer = game.currentPlayer;
@@ -49,15 +50,12 @@ export class GameComponent implements OnInit{
          this.game.players = game.players;
          this.game.stack = game.stack;
          console.log(this.game);
-         
         });
     })
   }
 
   async newGame(){
     this.game = new Game;
-    const docRef = await addDoc(collection(this.firebaseService.firestore, "games"),
-    this.game.toJson())
 }
 
   takeCard() {
@@ -87,4 +85,10 @@ export class GameComponent implements OnInit{
   
   });
 }
+
+ saveGame(){
+
+ }
+
+
 }
