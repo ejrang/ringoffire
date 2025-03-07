@@ -40,6 +40,7 @@ export class GameComponent implements OnInit{
 
   ngOnInit(): void {
     this.newGame();
+    console.log(this.game);
     this.route.params.subscribe((params) => {
       this.gameId = params['id'];
         this.unsub = onSnapshot(
@@ -60,7 +61,7 @@ export class GameComponent implements OnInit{
 }
 
   takeCard() {
-    if(!this.pickCardAnimation){
+    if(!this.pickCardAnimation && this.game.stack){
       this.currentCard = this.game.stack.pop() ?? '';
       this.pickCardAnimation = true;     
       console.log(this.game);
@@ -90,7 +91,12 @@ export class GameComponent implements OnInit{
 
 async updateGame(){
   if(this.gameId){
-    await updateDoc(doc(this.firebaseService.firestore, "games", this.gameId),this.game.toJson())
+    await updateDoc(this.getGamesRef(),
+    this.game.toJson())
   }
+ }
+
+ getGamesRef(){
+  return doc(this.firebaseService.firestore, "games", this.gameId)
  }
 }
