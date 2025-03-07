@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { GameInfoComponent } from "../game-info/game-info.component";
 import { FirebaseServiceService } from '../services/firebase-service.service';
-import { addDoc, collection, doc, onSnapshot } from '@angular/fire/firestore';
+import { addDoc, collection, doc, onSnapshot, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -32,6 +32,7 @@ export class GameComponent implements OnInit{
   pickCardAnimation = false;
   game: Game = new Game;
   currentCard: string = '';
+  gameId!: string;
   constructor(private route: ActivatedRoute,private firebaseService: FirebaseServiceService,public dialog: MatDialog){
 
   }
@@ -40,10 +41,10 @@ export class GameComponent implements OnInit{
   ngOnInit(): void {
     this.newGame();
     this.route.params.subscribe((params) => {
+      this.gameId = params['id'];
         this.unsub = onSnapshot(
-        doc(this.firebaseService.firestore, "games", params['id']), 
+        doc(this.firebaseService.firestore, "games", this.gameId), 
   
-   
         (game: any) => { 
          this.game.currentPlayer = game.currentPlayer;
          this.game.playedCards = game.playedCards;
@@ -63,13 +64,14 @@ export class GameComponent implements OnInit{
       this.currentCard = this.game.stack.pop() ?? '';
       this.pickCardAnimation = true;     
       console.log(this.game);
-
+      this.updateGame();
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
     
     setTimeout(() => {
       this.game.playedCards.push(this.currentCard);
       this.pickCardAnimation = false;
+      this.updateGame(); 
     }, 1000);
    }
  }
@@ -81,14 +83,14 @@ export class GameComponent implements OnInit{
   dialogRef.afterClosed().subscribe((name: string) => {
     if(name && name.length > 0) {
       this.game.players.push(name);
+      this.updateGame();
     }
-  
   });
 }
 
- saveGame(){
-
+async updateGame(){
+  if(this.gameId){
+    await updateDoc(doc(this.firebaseService.firestore, "games", this.gameId),this.game.toJson())
+  }
  }
-
-
 }
