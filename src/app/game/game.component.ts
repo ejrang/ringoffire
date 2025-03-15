@@ -13,6 +13,7 @@ import { GameInfoComponent } from "../game-info/game-info.component";
 import { FirebaseServiceService } from '../services/firebase-service.service';
 import { addDoc, collection, doc, onSnapshot, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { PlayerMoblieComponent } from "../player-moblie/player-moblie.component";
 
 @Component({
   selector: 'app-game',
@@ -21,17 +22,14 @@ import { ActivatedRoute } from '@angular/router';
     MatIconModule,
     MatDialogModule,
     MatInputModule,
-    FormsModule, GameInfoComponent,
-  ],
+    FormsModule, GameInfoComponent, PlayerMoblieComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
 
 export class GameComponent implements OnInit{
-  pickCardAnimation = false;
   game: Game = new Game;
-  currentCard: string = '';
   gameId!: string;
   constructor(private route: ActivatedRoute,private firebaseService: FirebaseServiceService,public dialog: MatDialog){
 
@@ -39,18 +37,18 @@ export class GameComponent implements OnInit{
   unsub: any;
 
   ngOnInit(): void {
-    this.newGame();
+    this.newGame(); 
     console.log(this.game);
     this.route.params.subscribe((params) => {
       this.gameId = params['id'];
         this.unsub = onSnapshot(
         doc(this.firebaseService.firestore, "games", this.gameId), 
-  
-        (game: any) => { 
-         this.game.currentPlayer = game.currentPlayer;
-         this.game.playedCards = game.playedCards;
-         this.game.players = game.players;
-         this.game.stack = game.stack;
+        (game: any) => {
+          console.log( game);
+         this.game.currentPlayer = game.data().currentPlayer;
+         this.game.playedCards = game.data().playedCards;
+         this.game.players = game.data().players;
+         this.game.stack = game.data().stack;
          console.log(this.game);
         });
     })
@@ -61,17 +59,17 @@ export class GameComponent implements OnInit{
 }
 
   takeCard() {
-    if(!this.pickCardAnimation && this.game.stack){
-      this.currentCard = this.game.stack.pop() ?? '';
-      this.pickCardAnimation = true;     
+    if(!this.game.pickCardAnimation && this.game.stack){
+      this.game.currentCard = this.game.stack.pop() ?? '';
+      this.game.pickCardAnimation = true;     
       console.log(this.game);
-      this.updateGame();
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      this.updateGame();
     
     setTimeout(() => {
-      this.game.playedCards.push(this.currentCard);
-      this.pickCardAnimation = false;
+      this.game.playedCards.push(this.game.currentCard);
+      this.game.pickCardAnimation = false;
       this.updateGame(); 
     }, 1000);
    }
@@ -94,6 +92,10 @@ async updateGame(){
     await updateDoc(this.getGamesRef(),
     this.game.toJson())
   }
+ }
+
+ async addDoc(){
+  await addDoc(collection(this.firebaseService.firestore, "games"),this.game.toJson)
  }
 
  getGamesRef(){

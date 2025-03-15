@@ -69,4 +69,56 @@
     bottom: 32px;
     left: 100px;
     right: 100px;
+
+    @media (max-width: 720px) {
+       left: 0;
+       right: 0;
+       bottom: 0;
+    }
 }
+
+.scroll-container{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display:flex;
+    overflow-x: scroll;
+
+    app-player-mobile{
+        margin-left: 18px;
+    }
+}
+
+@media (max-width: 720px) {
+    .played-card {
+        transform: scale(1.3) translateX(-20px) translateY(-300px) rotate(-4deg);
+        left: 25px;
+        top: 54px;
+    }
+
+    .pick-card{
+        transition: all 125ms ease-in-out;
+        animation: pick-card-animation 1s ease-in-out !important;
+        transform: scale(1.3) translateX(-20px) translateY(-300px) rotate(-4deg) !important;
+    }
+
+    @keyframes pick-card-animation {
+        0% {
+            transform: scale(1);
+        }
+        30% {
+            transform: scale(1.7);
+        }
+        60% {
+            transform: scale(1.7);
+        }
+        100% {
+            transform: scale(1.3) translateX(-20px) translateY(-300px) rotate(4deg);
+    
+        }
+    }
+
+ }
+
